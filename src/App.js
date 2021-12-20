@@ -1,12 +1,13 @@
 import './App.css';
 import React, { Component } from 'react';
-import axios from 'axios';
+import Header from './components/Header.js';
+
 
 
 function App() {
   return (
     <div>
-      
+      <Header />
     </div>
   );
 }
