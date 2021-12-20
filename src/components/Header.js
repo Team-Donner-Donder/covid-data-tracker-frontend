@@ -1,6 +1,6 @@
 import React from 'react'
 import  {Component}  from 'react'
-import  Nav  from 'react-bootstrap/Nav'
+import  {Nav}  from 'react-bootstrap'
 
 export default class Header extends Component {
   render() {
@@ -8,7 +8,6 @@ export default class Header extends Component {
 
         <>
         <h1> COVID-19 Tracker</h1>
-        <h2> This is the navbar</h2>
         <Nav className="justify-content-center" activeKey="/home">
           <Nav.Item>
             <Nav.Link href="/home">Home</Nav.Link>
