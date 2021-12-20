@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
-import { Nav } from 'react-bootstrap'
+import React from 'react'
+import  {Component}  from 'react'
+import  Nav  from 'react-bootstrap/Nav'
 
 export default class Header extends Component {
   render() {
     return (
-      <div>
+
+        <>
         <h1> COVID-19 Tracker</h1>
+        <h2> This is the navbar</h2>
         <Nav className="justify-content-center" activeKey="/home">
           <Nav.Item>
             <Nav.Link href="/home">Home</Nav.Link>
@@ -17,7 +20,9 @@ export default class Header extends Component {
             <Nav.Link eventKey="link-2">Saved Locations</Nav.Link>
           </Nav.Item>
         </Nav>
-      </div>
+        
+        </>
+    
     )
   }
 }
