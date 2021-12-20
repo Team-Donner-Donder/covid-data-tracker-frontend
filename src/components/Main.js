@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import ZipForm from './ZipForm'
+import DataTable from './DataTable.js'
+import ZipForm from './ZipForm.js'
 
 
 
@@ -8,6 +9,8 @@ export default class Main extends Component {
     return (
       <div>
         <ZipForm />
+        <DataTable />
+      
       </div>
     )
   }

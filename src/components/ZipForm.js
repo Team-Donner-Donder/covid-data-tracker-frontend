@@ -20,8 +20,6 @@ export default class ZipForm extends Component {
             Submit
           </Button>
         </Form>
-
-
         </Card>
       </div>
     )
