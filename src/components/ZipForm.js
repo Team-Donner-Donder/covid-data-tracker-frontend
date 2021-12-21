@@ -2,8 +2,30 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card  from 'react-bootstrap/Card'
+import axios from 'axios'
 
 export default class ZipForm extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      zip: {},
+
+    }
+  }
+  handleClick = (e) => {
+    e.preventDefault()
+    // this.setState({ zip });
+    this.get()
+  };
+
+  get = async () => { 
+    const url = `http://localhost:3001/covidData`
+    let result = await axios.get(url)
+
+    console.log('Result.data: ', result.data)
+  }
+
   render() {
     return (
       <div>
@@ -16,7 +38,7 @@ export default class ZipForm extends Component {
               This is search for the city you want to search!
             </Form.Text>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button onClick={this.handleClick} variant="primary" type="submit">
             Submit
           </Button>
         </Form>
