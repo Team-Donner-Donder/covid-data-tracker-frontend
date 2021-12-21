@@ -13,7 +13,6 @@ export default class Main extends Component {
           <Button />
           <ZipForm id="zipform" />
         </div>
-        <DataTable />
       </div>
     )
   }

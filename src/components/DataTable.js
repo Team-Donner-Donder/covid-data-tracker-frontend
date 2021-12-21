@@ -50,15 +50,14 @@ export default class DataTable extends Component {
               <td>Table cell</td>
               <td>Table cell</td>
               <Button onClick={() => this.props.handleDelete()}>Delete</Button>
-              {/* Not sure on what is suppose to go inside handleDelete */}
             </tr>
           </tbody>
-          {
-            this.props.zip.map((zip, idx) => 
-            <ZipForm key={zip} zipData={zip} handleDelete={this.props.delete}
-            />
-            )
-          }
+          {/* { */}
+            {/* // this.props.zip.map((zip, idx) => 
+            // <ZipForm key={idx} zipData={zip} handleDelete={this.props.handleDelete}
+            // />
+          //   )
+          // } */}
 
         </Table>
 
@@ -66,5 +65,6 @@ export default class DataTable extends Component {
 
       </div>
     )
-  }
+  // }
+}
 }

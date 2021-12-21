@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios'
+import DataTable from './DataTable'
 
 export default class ZipForm extends Component {
 
@@ -20,8 +21,9 @@ export default class ZipForm extends Component {
   };
 
   handleDelete = () => {
-    this.setState({ zip });
+    // this.setState({ zip });
     this.delete()
+    console.log('hey its deleted');
   }
 
   componentDidMount() {
@@ -36,11 +38,11 @@ export default class ZipForm extends Component {
   }
 
   delete = async () => {
-    try {
-      const url = `${process.env.SERVER_URL}`;
-      let result = await axios.get(url);
+    const url = `${process.env.SERVER_URL}`;
+      try {
+        await axios.delete(url);
       let filteredData = this.state.zip.filter(zip => zip);
-      this.setState({ zip: updatedChart });
+      this.setState({ zip: filteredData });
     } catch (e) {
       console.error(e);
     }
@@ -60,7 +62,7 @@ export default class ZipForm extends Component {
 
   render() {
     return (
-      <div>
+      <div>  
         <Card className="text-center" border="primary" style={{ width: '18rem', marginLeft: '42.5%' }}>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -77,6 +79,7 @@ export default class ZipForm extends Component {
               Delete</Button>
           </Form>
         </Card>
+        <DataTable handleDelete={this.handleDelete} />
       </div>
     )
   }
