@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import ZipForm from './ZipForm'
 
 export default class DataTable extends Component {
   render() {
@@ -47,8 +49,17 @@ export default class DataTable extends Component {
               <td>Table cell</td>
               <td>Table cell</td>
               <td>Table cell</td>
+              <Button onClick={() => this.props.handleDelete()}>Delete</Button>
+              {/* Not sure on what is suppose to go inside handleDelete */}
             </tr>
           </tbody>
+          {
+            this.props.zip.map((zip, idx) => 
+            <ZipForm key={zip} zipData={zip} handleDelete={this.props.delete}
+            />
+            )
+          }
+
         </Table>
 
         </Card>

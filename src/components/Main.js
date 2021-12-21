@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Buttons from './Buttons.js'
 import DataTable from './DataTable.js'
 import ZipForm from './ZipForm.js'
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -10,7 +10,7 @@ export default class Main extends Component {
     return (
       <div>
         <div class="mainComp">
-          <Buttons />
+          <Button />
           <ZipForm id="zipform" />
         </div>
         <DataTable />
