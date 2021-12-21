@@ -4,20 +4,21 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios'
 import DataTable from './DataTable'
-
+import Chart from './Chart'
 export default class ZipForm extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       zip: {},
+      historicData:{},
 
     }
   }
   handleClick = (e) => {
     e.preventDefault()
     // this.setState({ zip });
-    this.get()
+    this.getHistoricData()
   };
 
   handleDelete = () => {
@@ -27,18 +28,18 @@ export default class ZipForm extends Component {
   }
 
   componentDidMount() {
-    this.get();
+    this.getHistoricData();
   }
 
-  get = async () => {
-    const url = `${process.env.SERVER_URL}`;
+  getHistoricData = async () => {
+    const url = `http://localhost:3001/coviddata`;
     let result = await axios.get(url)
-
+    this.setState({historicData: result.data})
     console.log('Result.data: ', result.data)
   }
 
   delete = async () => {
-    const url = `${process.env.SERVER_URL}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}`;
       try {
         await axios.delete(url);
       let filteredData = this.state.zip.filter(zip => zip);
@@ -80,6 +81,7 @@ export default class ZipForm extends Component {
           </Form>
         </Card>
         <DataTable handleDelete={this.handleDelete} />
+        <Chart historicData={this.state.historicData}/>
       </div>
     )
   }

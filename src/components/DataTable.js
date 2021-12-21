@@ -3,13 +3,14 @@ import Table from 'react-bootstrap/Table'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ZipForm from './ZipForm'
+import Chart from './Chart'
+
 
 export default class DataTable extends Component {
   render() {
     return (
       <div>
         <Card className="text-center" border="primary" style={{ width: '30rem', marginLeft: '38%'}}>
-
         <Table responsive="sm" size="sm">
           <thead>
             <tr>
@@ -32,36 +33,20 @@ export default class DataTable extends Component {
               <td>Table cell</td>
               <td>Table cell</td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <Button onClick={() => this.props.handleDelete()}>Delete</Button>
-            </tr>
+            <Button onClick={this.handleDelete}> Delete </Button>
+       
           </tbody>
           {/* { */}
             {/* // this.props.zip.map((zip, idx) => 
             // <ZipForm key={idx} zipData={zip} handleDelete={this.props.handleDelete}
             // />
-          //   )
+            //   )
           // } */}
 
         </Table>
 
         </Card>
+        
 
       </div>
     )
