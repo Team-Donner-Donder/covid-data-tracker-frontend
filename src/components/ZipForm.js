@@ -13,9 +13,11 @@ export default class ZipForm extends Component {
       zip: {},
       historicData: {},
       selected_State: '',
+      dailyData: [],
 
     }
   }
+
   handleClick = (e) => {
     e.preventDefault()
     const city = {
@@ -23,7 +25,7 @@ export default class ZipForm extends Component {
 
 }
     // this.setState({ zip });
-    this.getHistoricData(city)
+    this.getHistoricData()
     this.getCurrentData(city.selected_State)
   };
 
@@ -42,7 +44,7 @@ export default class ZipForm extends Component {
   }
 
   getHistoricData = async () => {
-    const url = `http://localhost:3001/coviddata`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata`;
     let result = await axios.get(url)
     this.setState({ historicData: result.data })
     // console.log('Result.data: ', result.data)
@@ -66,7 +68,9 @@ export default class ZipForm extends Component {
     console.log('url',url)
     try {
       const results = await axios.get(url)
-      this.setState({ selected_State: input })
+      this.setState({ 
+        selected_State: input,
+        dailyData: results.data })
       console.log('results', results.data)
     } catch (e) {
       console.error(e.message);
@@ -86,8 +90,6 @@ export default class ZipForm extends Component {
   }
 
 
-
-
   render() {
     
     return (
@@ -96,10 +98,10 @@ export default class ZipForm extends Component {
 
           <Form onSubmit={this.handleClick}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Zip Code</Form.Label>
-              <Form.Control name='name' type="text" placeholder="Enter Zip Code Here" />
+              <Form.Label>State/Province</Form.Label>
+              <Form.Control name='name' type="text" placeholder="State or Province here" />
               <Form.Text className="text-muted">
-                This is search for the city you want to search!
+                This is to search for the city you want to learn more about!
               </Form.Text>
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -109,8 +111,8 @@ export default class ZipForm extends Component {
               Delete</Button>
           </Form>
         </Card>
-        <DataTable handleDelete={this.handleDelete} />
-        <Chart historicData={this.state.historicData} />
+        <DataTable getCurrentData={this.state.dailyData} handleDelete={this.handleDelete} />
+        <Chart historicData={this.state.historicData}  />
 
       </div>
     )
