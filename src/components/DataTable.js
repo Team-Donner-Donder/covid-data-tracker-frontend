@@ -17,10 +17,7 @@ export default class DataTable extends Component {
               <th>#</th>
               <th>Table heading</th>
               <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
-              <th>Table heading</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -28,12 +25,8 @@ export default class DataTable extends Component {
               <td>1</td>
               <td>Table cell</td>
               <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
+              <Button onClick={this.handleDelete}> Delete </Button>
             </tr>
-            <Button onClick={this.handleDelete}> Delete </Button>
        
           </tbody>
           {/* { */}

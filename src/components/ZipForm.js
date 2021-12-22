@@ -23,7 +23,7 @@ export default class ZipForm extends Component {
 
   handleDelete = () => {
     // this.setState({ zip });
-    this.delete()
+    this.delete();
     console.log('hey its deleted');
   }
 
@@ -68,7 +68,7 @@ export default class ZipForm extends Component {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Zip Code</Form.Label>
-              <Form.Control type="text" placeholder="Enter Zip Code Here" />
+              <Form.Control name='zipcode'type="text" placeholder="Enter Zip Code Here" />
               <Form.Text className="text-muted">
                 This is search for the city you want to search!
               </Form.Text>
