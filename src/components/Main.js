@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
-import Buttons from './Buttons.js'
-import DataTable from './DataTable.js'
-import ZipForm from './ZipForm.js'
-
-
+import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
+import LoginButon from "./LoginButon.js";
+import ZipForm from "./ZipForm.js";
 
 export default class Main extends Component {
   render() {
     return (
       <div>
-        <div class="mainComp">
-          <Buttons />
-          <ZipForm id="zipform" />
+        <div className='mainComp'>
+          <LoginButon />
+          <Button />
+          <ZipForm id='zipform' />
         </div>
-        <DataTable />
       </div>
-    )
+    );
   }
 }
