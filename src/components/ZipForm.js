@@ -119,6 +119,7 @@ export default class ZipForm extends Component {
             dailyData: results.data
           })
           console.log('results', results.data)
+          console.log(this.state.dailyData)
         } catch (e) {
           console.error(e.message);
         }

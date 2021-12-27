@@ -5,12 +5,7 @@ import Card from "react-bootstrap/Card";
 
 export default class DataTable extends Component {
   render() {
-    {
-      console.log("datatable", this.props.getCurrentData);
-    }
-    {
-      console.log("Date", this.props.getCurrentData);
-    }
+    
     return (
       <div>
         <Card
