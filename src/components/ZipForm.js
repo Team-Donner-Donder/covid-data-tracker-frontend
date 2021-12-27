@@ -51,15 +51,40 @@ export default class ZipForm extends Component {
   }
 
   delete = async () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata`;
     try {
       await axios.delete(url);
-      let filteredData = this.state.zip.filter(zip => zip);
-      this.setState({ zip: filteredData });
+      let filteredData = this.state.zip.filter(data => data);
+      this.setState({ data: filteredData });
     } catch (e) {
       console.error(e);
     }
   }
+//   // if (this.props.auth0.isAuthenticated) {
+//     try { 
+//       const res = await this.props.auth0.getIdTokenClaims();
+      
+//       const jwt = res.__raw;
+      
+//       const config = {
+//         headers: { "Authorization": `Bearer ${jwt}` },
+//         method: 'delete',
+//         baseURL: process.env.REACT_APP_SERVER_URL,
+//         url: `coviddata/data`,
+//         data: covoidata
+//       }
+//       const response = await axios(config);
+//       if (response.status === 204) {
+//         this.getHistoricData();
+//       } else {
+//         alert(response.status);
+//       }
+//     }
+//     catch (error) {
+//       alert(error.toString());
+//     }
+//   }
+// }
 
 
   getCurrentData = async (input) => {
