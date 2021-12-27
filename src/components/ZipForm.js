@@ -16,6 +16,7 @@ export default class ZipForm extends Component {
       historicData: {},
       selected_State: '',
       dailyData: [],
+      zipcode:{}
 
     }
   }
@@ -24,11 +25,20 @@ export default class ZipForm extends Component {
     e.preventDefault()
     const city = {
       selected_State: e.target.name.value,
-
     }
+
     // this.setState({ zip });
-    this.getHistoricData()
     this.getCurrentData(city.selected_State)
+  };
+
+  handleZip = (e) => {
+    e.preventDefault()
+    const city = {
+      zipcode: e.target.name.value,
+    }
+
+    // this.setState({ zip });
+    this.getHistoricData(city.zipcode)
   };
 
   handleDelete = () => {
@@ -45,10 +55,16 @@ export default class ZipForm extends Component {
     this.getHistoricData();
   }
 
-  getHistoricData = async () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata`;
-    let result = await axios.get(url)
-    this.setState({ historicData: result.data })
+  getHistoricData = async (zipcode) => {
+    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata?zipcode=${zipcode}`;
+    console.log(url)
+    try{
+      const results = await axios.get(url)
+      this.setState({ historicData: results.data })
+
+    }catch (e){
+      console.error(e.message);
+     }
     // console.log('Result.data: ', result.data)
   }
 
@@ -79,35 +95,6 @@ export default class ZipForm extends Component {
     }
   
   
-  
-      //   // if (this.props.auth0.isAuthenticated) {
-      //     try { 
-      //       const res = await this.props.auth0.getIdTokenClaims();
-
-      //       const jwt = res.__raw;
-
-      //       const config = {
-      //         headers: { "Authorization": `Bearer ${jwt}` },
-      //         method: 'delete',
-      //         baseURL: process.env.REACT_APP_SERVER_URL,
-      //         url: `coviddata/data`,
-      //         data: covoidata
-      //       }
-      //       const response = await axios(config);
-      //       if (response.status === 204) {
-      //         this.getHistoricData();
-      //       } else {
-      //         alert(response.status);
-      //       }
-      //     }
-      //     catch (error) {
-      //       alert(error.toString());
-      //     }
-      //   }
-
-      // }
-
-
       getCurrentData = async (input) => {
         let url = `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}`
         // console.log('input', input.selected_State)
@@ -143,6 +130,20 @@ export default class ZipForm extends Component {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>State/Province</Form.Label>
                   <Form.Control name='name' type="text" placeholder="State or Province here" />
+                  <Form.Text className="text-muted">
+                    This is to search for the city you want to learn more about!
+                  </Form.Text>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+                <Button onClick={this.handleDelete}>
+                  Delete</Button>
+              </Form>
+              <Form onSubmit={this.handleZip}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Zip Code</Form.Label>
+                  <Form.Control name='name' type="text" placeholder="Zip Code" />
                   <Form.Text className="text-muted">
                     This is to search for the city you want to learn more about!
                   </Form.Text>
