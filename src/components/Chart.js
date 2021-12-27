@@ -11,7 +11,6 @@ import {
 
 export default class Chart extends PureComponent {
   render() {
-    {console.log("chart", this.props.historicData);}
     return (
       // <ResponsiveContainer width="100%" height="100%">
       <BarChart
