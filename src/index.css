@@ -56,3 +56,9 @@ form-content {
 .accordion-text, h5 {
   color: gray;
 }
+
+body {
+  background-color: slategray;
+}
+
+
