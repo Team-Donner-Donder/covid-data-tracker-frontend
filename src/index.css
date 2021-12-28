@@ -60,6 +60,8 @@ form-content {
 .side-by-side {
   display: flex;
   justify-content: space-between;
+  padding: 50px;
+  border-top: 2px solid black;
 }
 
 .half-width {
@@ -70,13 +72,25 @@ form-content {
   background-image: url("./images/beau.png");
 }
 
-#matt{
-  background-image: url("./images/beau.png");
+#matt {
+  background-image: url("./images/matt.png");
+}
+
+#chris {
+  background-image: url("./images/chris.png")
+}
+
+#jacob {
+  background-image: url("./images/jacob.png")
+}
+
+#milsap {
+  background-image: url("./images/milsap.png")
 }
 
 .about {
   max-width: 100%;
-  padding: 30px;
+  padding: 50px;
 }
 
 .headshot {

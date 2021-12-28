@@ -29,8 +29,8 @@ export default class Chart extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar label='test' dataKey='deathCt' fill='#8884d8' />
-        <Bar label='test' dataKey='positiveCt' fill='#82ca9d' />
+        <Bar label='test' dataKey='deathCt' fill='#C0392B' />
+        <Bar label='test' dataKey='positiveCt' fill='#2980B9' />
       </BarChart>
       // </ResponsiveContainer>
     );
