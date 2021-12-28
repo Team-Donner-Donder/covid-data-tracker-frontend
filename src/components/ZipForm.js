@@ -32,6 +32,7 @@ class ZipForm extends Component {
     }
     this.getCurrentData(city.city)
     this.getHistoricData(city.zipcode)
+
     
   }
 
@@ -42,8 +43,8 @@ class ZipForm extends Component {
     console.log('hey its deleted');
   }
 
-  handleCurrentCityClick = () => {
-
+  handleAddCityClick = () => {
+    this.addData(this.state.dailyData.data[0])
   }
   
 
@@ -95,7 +96,6 @@ class ZipForm extends Component {
 
   getCurrentData = async (input) => {
     let url = `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}`
-    // console.log('input', input.selected_State)
     console.log('url', url)
     try {
       const results = await axios.get(url)
@@ -118,8 +118,8 @@ class ZipForm extends Component {
       const results = await axios.get(url)
       console.log(results);
       this.setState({
-        mongoData: results.data,
-        dailyData: results.data,
+        mongoData: results.data
+        // dailyData: results.data,
 
       })
       console.log('results', results.data)
@@ -127,11 +127,33 @@ class ZipForm extends Component {
     } catch (e) {
       console.error(e.message);
     }
-    addData = async () => {
-      
-    }
+    
 
   }
+  addData = async (data) => {
+
+
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+
+      const jwt = res.__raw;
+      // axios npm
+      const config = {
+        method: 'post',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/mongoData',
+        data: data,
+        headers: { "Authorization": `Bearer ${jwt}`}
+      }
+    try {
+      const dataResponse = await axios(config)
+      console.log('Data Response ' + dataResponse.data)
+      this.setState({ mongoData: [...this.state.mongoData, dataResponse.data ] });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+}
   render() {
     return (
       <div>
@@ -152,13 +174,14 @@ class ZipForm extends Component {
             <Button variant="primary" type="submit">
               Submit
             </Button>
-            <Button onClick={this.handleDelete}>
-              Delete</Button>
+            {/* <Button onClick={this.handleAddCityClick}>
+              Add Location</Button> */}
           </Form>
         </Card>
         <DataTable getCurrentData={this.state.dailyData} 
         delete={this.deleteState} 
-        mongoData={this.state.mongoData} />
+        mongoData={this.state.mongoData}
+        add={this.handleAddCityClick} />
         <Chart historicData={this.state.historicData} />
 
       </div>
