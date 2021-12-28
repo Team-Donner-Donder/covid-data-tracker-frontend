@@ -12,12 +12,9 @@ const Profile = () => {
 
   return (
     isAuthenticated ? (
-      <Card style={{ width: '20rem' }}>
+      <Card style={{ width: '6rem' }}>
         <Card.Img src={user.picture} alt={user.name} />
-        <Card.Title>
-          {user.name}
-          <Card.Body>{user.email}</Card.Body>
-        </Card.Title>
+       
         
         <LogoutButton /> 
       </Card>
