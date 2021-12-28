@@ -24,25 +24,17 @@ export default class ZipForm extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const city = {
-      selected_State: e.target.name.value,
+      city: e.target.name.value,
+      zipcode: e.target.zipCode.value,
     }
-
-    // this.setState({ zip });
-    this.getCurrentData(city.selected_State)
-  };
-
-  handleZip = (e) => {
-    e.preventDefault()
-    const city = {
-      zipcode: e.target.name.value,
-    }
-
-    // this.setState({ zip });
+    this.getCurrentData(city.city)
     this.getHistoricData(city.zipcode)
-  };
+  
+  }
 
+  
   handleDelete = () => {
-    // this.setState({ zip });
+  
     this.delete();
     console.log('hey its deleted');
   }
@@ -95,8 +87,9 @@ export default class ZipForm extends Component {
     }
   
   
-      getCurrentData = async (input) => {
-        let url = `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}`
+      getCurrentData = async (input=null) => {
+        // let url = input ? `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}` : `${process.env.REACT_APP_SERVER_URL}/mongoData`
+        let url = `${process.env.REACT_APP_SERVER_URL}/mongoData`
         // console.log('input', input.selected_State)
         console.log('url', url)
         try {
@@ -134,20 +127,10 @@ export default class ZipForm extends Component {
                     This is to search for the city you want to learn more about!
                   </Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-                <Button onClick={this.handleDelete}>
-                  Delete</Button>
-              </Form>
-              <Form onSubmit={this.handleZip}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Zip Code</Form.Label>
-                  <Form.Control name='name' type="text" placeholder="Zip Code" />
-                  <Form.Text className="text-muted">
-                    This is to search for the city you want to learn more about!
-                  </Form.Text>
-                </Form.Group>
+                <Form.Group className="mb-3" controlId="zipCode">
+            <Form.Label>Zip Code</Form.Label>
+            <Form.Control type="text" placeholder="98121" />
+          </Form.Group>
                 <Button variant="primary" type="submit">
                   Submit
                 </Button>
