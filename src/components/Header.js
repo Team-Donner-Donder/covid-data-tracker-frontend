@@ -8,15 +8,15 @@ export default class Header extends Component {
 
         <>
         <h1> COVID-19 Tracker</h1>
-        <Nav className="justify-content-center" activeKey="/home">
+        <Nav className="justify-content-center" variant="tabs" defaultActiveKey="/home">
           <Nav.Item>
             <Nav.Link href="/home">Home</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-1">Locations</Nav.Link>
+            <Nav.Link eventKey="link-1">Data</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-2">Saved Locations</Nav.Link>
+            <Nav.Link eventKey="link-2">About Us</Nav.Link>
           </Nav.Item>
         </Nav>
         
