@@ -36,15 +36,6 @@ class App extends React.Component {
     <div>
       <Header />
       <Main />
-        {/* <Router>
-          <Routes>
-            <Route path="/" component={Login}/>
-            <Route index component={Main} />
-            <Route path="/data" component={Data} />
-            <Route path="/about" component={About} />
-            <Route path="/*" component={NotFound} />
-        </Routes>
-      </Router> */}
       <Footer />
     </div>
   );
