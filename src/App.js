@@ -6,8 +6,8 @@ import Footer from './components/Footer.js';
 import About from './components/About.js';
 import React from 'react';
 import Data from './components/Data.js';
-import Login from './components/Login.js';
-import NotFound from './components/404.js'
+// import Login from './components/Login.js';
+// import NotFound from './components/404.js'
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Routes, Route, Router, useParams } from "react-router-dom";
 import {
@@ -15,7 +15,7 @@ import {
   Routes,
   Route
 }from "react-router-dom";
-import ZipForm from './components/ZipForm.js';
+// import ZipForm from './components/ZipForm.js';
 
 class App extends React.Component {
   constructor(props) {
