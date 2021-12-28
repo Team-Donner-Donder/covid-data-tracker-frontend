@@ -13,7 +13,7 @@ class ZipForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      zip: {},
+      zip: [],
       historicData: {},
       selected_State: '',
       dailyData: [],
@@ -32,13 +32,13 @@ class ZipForm extends Component {
     }
     this.getCurrentData(city.city)
     this.getHistoricData(city.zipcode)
-
+    
   }
 
 
   handleDelete = () => {
-
-    this.delete();
+    
+    this.deleteState();
     console.log('hey its deleted');
   }
 
@@ -82,9 +82,8 @@ class ZipForm extends Component {
       }
       try {
         await axios(config)
-        let filteredData = this.state.zip.filter(data => data._id !== id);
-        this.setState({ dailyData: filteredData })
-        console.log(this.state.dailyData);
+        let newData = this.state.mongoData.filter(data => data._id !== id);
+        this.setState({ mongoData: newData })
 
 
       } catch (e) {
@@ -104,8 +103,7 @@ class ZipForm extends Component {
         selected_State: input,
         dailyData: results.data
       })
-      console.log('results', results.data)
-      console.log(this.state.dailyData)
+
     } catch (e) {
       console.error(e.message);
     }
@@ -120,14 +118,18 @@ class ZipForm extends Component {
       const results = await axios.get(url)
       console.log(results);
       this.setState({
-        mongoData: results.data
+        mongoData: results.data,
+        dailyData: results.data,
+
       })
       console.log('results', results.data)
       console.log('mongo data', this.state.mongoData)
     } catch (e) {
       console.error(e.message);
     }
-
+    addData = async () => {
+      
+    }
 
   }
   render() {
