@@ -16,6 +16,7 @@ export default class ZipForm extends Component {
       historicData: {},
       selected_State: '',
       dailyData: [],
+      zipcode:{}
 
     }
   }
@@ -23,16 +24,17 @@ export default class ZipForm extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const city = {
-      selected_State: e.target.name.value,
-
+      city: e.target.name.value,
+      zipcode: e.target.zipCode.value,
     }
-    // this.setState({ zip });
-    this.getHistoricData()
-    this.getCurrentData(city.selected_State)
-  };
+    this.getCurrentData(city.city)
+    this.getHistoricData(city.zipcode)
+  
+  }
 
+  
   handleDelete = () => {
-    // this.setState({ zip });
+  
     this.delete();
     console.log('hey its deleted');
   }
@@ -45,131 +47,102 @@ export default class ZipForm extends Component {
     this.getHistoricData();
   }
 
-  getHistoricData = async () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata`;
-    let result = await axios.get(url)
-    this.setState({ historicData: result.data })
+  getHistoricData = async (zipcode) => {
+    const url = `${process.env.REACT_APP_SERVER_URL}/coviddata?zipcode=${zipcode}`;
+    console.log(url)
+    try{
+      const results = await axios.get(url)
+      this.setState({ historicData: results.data })
+
+    }catch (e){
+      console.error(e.message);
+     }
     // console.log('Result.data: ', result.data)
   }
 
   delete = async (id) => {
     console.log(`id:${id}`)
 
-    if (this.props.auth0.isAuthenticated) {
-      const response = await this.props.auth0.getIdTokenClaims()
-      const jwt = response.__raw;
+      if (this.props.auth0.isAuthenticated) {
+        const response = await this.props.auth0.getIdTokenClaims()
+        const jwt = response.__raw;
 
-      const config = {
-        method: 'delete',
-        baseURL: process.env.REACT_APP_SERVER_URL,
-        url: `/data/${id}`,
-        headers: { "Authorization": `Bearer ${jwt}` }
-      }
-      try {
-        await axios(config)
-        let filteredData = this.state.zip.filter(data => data._id !== id);
-        this.setState({ dailyData: filteredData })
-        console.log(this.state.dailyData);
+        const config = {
+          method: 'delete',
+          baseURL: process.env.REACT_APP_SERVER_URL,
+          url: `/data/${id}`,
+          headers: { "Authorization": `Bearer ${jwt}` }
+        }
+        try {
+          await axios(config)
+          let filteredData = this.state.zip.filter(data => data._id !== id);
+          this.setState({ dailyData: filteredData })
+          console.log(this.state.dailyData);
 
 
-      } catch (e) {
-        console.error(e);
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
-  }
+  
+  
+      getCurrentData = async (input=null) => {
+        // let url = input ? `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}` : `${process.env.REACT_APP_SERVER_URL}/mongoData`
+        let url = `${process.env.REACT_APP_SERVER_URL}/mongoData`
+        // console.log('input', input.selected_State)
+        console.log('url', url)
+        try {
+          const results = await axios.get(url)
+          this.setState({
+            selected_State: input,
+            dailyData: results.data
+          })
+          console.log('results', results.data)
+          console.log(this.state.dailyData)
+        } catch (e) {
+          console.error(e.message);
+        }
 
+      }
+      Chart = async () => {
+        axios.get("http://dummy.restapiexample.com/api/v1/employees")
+          .then(res => {
+            // console.log(res);
+          })
+          .catch(err => {
+            // console.log(err);
+          })
+      }
+      render() {
+        return (
+          <div>
+            <Card className="text-center" border="primary" style={{ width: '18rem', marginLeft: '42.5%' }}>
 
+              <Form onSubmit={this.handleClick}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>State/Province</Form.Label>
+                  <Form.Control name='name' type="text" placeholder="State or Province here" />
+                  <Form.Text className="text-muted">
+                    This is to search for the city you want to learn more about!
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="zipCode">
+            <Form.Label>Zip Code</Form.Label>
+            <Form.Control type="text" placeholder="98121" />
+          </Form.Group>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+                <Button onClick={this.handleDelete}>
+                  Delete</Button>
+              </Form>
+            </Card>
+            <DataTable getCurrentData={this.state.dailyData} handleDelete={this.handleDelete} />
+            <Chart historicData={this.state.historicData} />
 
-  //   // if (this.props.auth0.isAuthenticated) {
-  //     try { 
-  //       const res = await this.props.auth0.getIdTokenClaims();
-
-  //       const jwt = res.__raw;
-
-  //       const config = {
-  //         headers: { "Authorization": `Bearer ${jwt}` },
-  //         method: 'delete',
-  //         baseURL: process.env.REACT_APP_SERVER_URL,
-  //         url: `coviddata/data`,
-  //         data: covoidata
-  //       }
-  //       const response = await axios(config);
-  //       if (response.status === 204) {
-  //         this.getHistoricData();
-  //       } else {
-  //         alert(response.status);
-  //       }
-  //     }
-  //     catch (error) {
-  //       alert(error.toString());
-  //     }
-  //   }
-
-  // }
-
-
-  getCurrentData = async (input) => {
-    let url = `${process.env.REACT_APP_SERVER_URL}/currentData?state=${input}`
-    // console.log('input', input.selected_State)
-    console.log('url', url)
-    try {
-      const results = await axios.get(url)
-      this.setState({
-        selected_State: input,
-        dailyData: results.data
-      })
-      console.log('results', results.data)
-      console.log(this.state.dailyData)
-    } catch (e) {
-      console.error(e.message);
+          </div>
+        )
+      }
     }
-
-  }
-  Chart = async () => {
-    axios.get("http://dummy.restapiexample.com/api/v1/employees")
-      .then(res => {
-        // console.log(res);
-      })
-      .catch(err => {
-        // console.log(err);
-      })
-  }
-  render() {
-    return (
-      <div>
-        <Card className="text-center" border="primary" style={{ width: '18rem', marginLeft: '42.5%' }}>
-
-          <Form onSubmit={this.handleClick}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>State/Province</Form.Label>
-              <Form.Control name='name' type="text" placeholder="State or Province here" />
-              <Form.Text className="text-muted">
-                This is to search for the city you want to learn more about!
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formDate">
-              <Form.Label>Date</Form.Label>
-              <Form.Control type="date" placeholder="YYYY-MM-DD" />
-              <Form.Text className="text-muted">
-                Please add Date in YYYY-MM-DD format
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formZipcode">
-              <Form.Label>Zipcode</Form.Label>
-              <Form.Control type="number" placeholder="Enter zipcode" />
-              <Form.Text className="text-muted">
-                Search by zipcode
-              </Form.Text>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card>
-        <DataTable getCurrentData={this.state.dailyData} handleDelete={this.handleDelete} />
-        <Chart historicData={this.state.historicData} />
-
-      </div>
-    )
-  }
-}
+  
