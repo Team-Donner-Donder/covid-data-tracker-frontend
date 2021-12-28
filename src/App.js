@@ -3,7 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Footer from './components/Footer.js';
+import About from './components/About.js';
 import React from 'react';
+import Data from './components/Data.js';
+import Login from './components/Login.js';
+import NotFound from './components/404.js'
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { Routes, Route, Router, useParams } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+}from "react-router-dom";
+import ZipForm from './components/ZipForm.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,13 +40,83 @@ class App extends React.Component {
 
  render() {
   return (
-    <div>
-      <Header />
-      <Main />
-      <Footer />
-      
-    </div>
+ <BrowserRouter>
+            <Header />
+          <Routes>
+            <Route exact path="/" element={<Main/>} />
+            <Route exact path="/data" element={<Data/>} />
+            <Route exact path="/about" element={<About/>} />
+            {/* <Route exact path="/*" component={NotFound} /> */}
+        </Routes>
+          <Footer />
+      </BrowserRouter>
   );
 }
 }
 export default App;
+
+
+
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" component={<Login />}/>
+//         <Route index component={<Main />} />
+//         <Route path="/data" component={<Data />} />
+//         <Route path="/about" component={<AboutUs />} />
+//         <Route path="/*" component={<NoPage />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+// app.get("/covidData", covidData);
+// app.get("/currentData", getCurrentData);
+// app.get("/test", (request, response) => {
+//   response.send("test request received");
+
+
+
+// export default function App() {
+//   return (
+//     <Router>
+//       <div>
+//         <nav>
+//           <ul>
+//             <li>
+//               <Link to="/">Home</Link>
+//             </li>
+//             <li>
+//               <Link to="/covidData">Covid Data</Link>
+//             </li>
+//             <li>
+//               <Link to="/currentData">Current Data</Link>
+//             </li>
+//           </ul>
+//         </nav>
+
+//         {/* A <Switch> looks through its children <Route>s and
+//             renders the first one that matches the current URL. */}
+//         <Switch>
+//           <Route path="/about">
+//             <About />
+//           </Route>
+//           <Route path="/users">
+//             <Users />
+//           </Route>
+//           <Route path="/">
+//             <Home />
+//           </Route>
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// }
+
+
+

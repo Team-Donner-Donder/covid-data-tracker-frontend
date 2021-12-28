@@ -56,3 +56,34 @@ form-content {
 .accordion-text, h5 {
   color: gray;
 }
+
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-width {
+  width: 50%;
+}
+
+#beau {
+  background-image: url("./images/beau.png");
+}
+
+#matt{
+  background-image: url("./images/beau.png");
+}
+
+.about {
+  max-width: 100%;
+  padding: 30px;
+}
+
+.headshot {
+  width: 300px;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
