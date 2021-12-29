@@ -6,10 +6,15 @@ import axios from 'axios'
 import DataTable from './DataTable'
 import Chart from './Chart'
 import { withAuth0 } from '@auth0/auth0-react';
-
+import { useAuth0 } from "@auth0/auth0-react";
+import LogoutButton from './LogoutButton'
+import LoginButton from './LoginButton'
 
 
 class ZipForm extends Component {
+  
+
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -154,11 +159,25 @@ class ZipForm extends Component {
     }
   };
 }
+
   render() {
+    const {  user, isAuthenticated, isLoading } = this.props.auth0;
     return (
       <div>
+        
+        
+        
         <Card className="text-center" border="primary" style={{ width: '18rem', marginLeft: '42.5%' }}>
+        
+{        isAuthenticated ? (
+      <Card style={{ width: '6rem' }}>
 
+       
+        
+         
+      </Card>
+    ) : <LoginButton />}
+        {isAuthenticated &&
           <Form onSubmit={this.handleClick}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>State/Province</Form.Label>
@@ -174,16 +193,17 @@ class ZipForm extends Component {
             <Button variant="primary" type="submit">
               Submit
             </Button>
-            {/* <Button onClick={this.handleAddCityClick}>
-              Add Location</Button> */}
-          </Form>
+          </Form>}
         </Card>
+        {isAuthenticated &&
+        <Card>
         <DataTable getCurrentData={this.state.dailyData} 
         delete={this.deleteState} 
         mongoData={this.state.mongoData}
         add={this.handleAddCityClick} />
         <Chart historicData={this.state.historicData} />
-
+        </Card>
+        }
       </div>
     )
   }
