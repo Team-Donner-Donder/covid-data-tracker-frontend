@@ -52,8 +52,8 @@ class App extends React.Component {
             <Header />
           <Routes>
             <Route exact path="/" element={<Main/>} />
-            <Route exact path="/Data" element={<Data/>} />
-            <Route exact path="/About" element={<About/>} />
+            <Route exact path="/data" element={<Data/>} />
+            <Route exact path="/about" element={<About/>} />
             {/* <Route exact path="/*" component={NotFound} /> */}
             {/* <Route path="/" > 
             <Main />
