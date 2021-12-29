@@ -7,6 +7,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Brush,
 } from "recharts";
 
 export default class Chart extends PureComponent {
@@ -25,10 +26,11 @@ export default class Chart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray='4 4' />
-        <XAxis label='Dates' stroke='#8884d8' width={100} />
+        <XAxis dataKey='date' stroke='#8884d8' width={100} />
         <YAxis />
         <Tooltip />
         <Legend />
+         <Brush />
         <Bar label='test' dataKey='deathCt' fill='#C0392B' />
         <Bar label='test' dataKey='positiveCt' fill='#2980B9' />
       </BarChart>
