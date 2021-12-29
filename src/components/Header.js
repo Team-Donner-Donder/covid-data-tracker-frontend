@@ -9,7 +9,7 @@ export default class Header extends Component {
 
         <>
 
-        <h1> COVID-19 Tracker</h1>
+        <h1> COVID-19 Dashboard</h1>
         <div className='profile tag'>
         <Profile />
         </div>
