@@ -13,7 +13,7 @@ import Data from './components/Data.js';
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route, 
 }from "react-router-dom";
 // import ZipForm from './components/ZipForm.js';
 
@@ -40,16 +40,34 @@ class App extends React.Component {
 
  render() {
   return (
+    <div>
  <BrowserRouter>
+    {/* <nav>
+        <ul>
+          <li><link to="/">Main</link></li>
+          <li><link to="/Data">Data</link></li>
+          <li><link to="/About">About</link></li>
+        </ul>
+      </nav> */}
             <Header />
           <Routes>
             <Route exact path="/" element={<Main/>} />
-            <Route exact path="/data" element={<Data/>} />
-            <Route exact path="/about" element={<About/>} />
+            <Route exact path="/Data" element={<Data/>} />
+            <Route exact path="/About" element={<About/>} />
             {/* <Route exact path="/*" component={NotFound} /> */}
+            {/* <Route path="/" > 
+            <Main />
+            </Route>
+            <Route path="/data" > 
+            <Data />
+            </Route>
+            <Route path="/about" > 
+            <About />
+            </Route> */}
         </Routes>
           <Footer />
       </BrowserRouter>
+      </div>
   );
 }
 }
