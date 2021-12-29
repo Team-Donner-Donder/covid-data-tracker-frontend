@@ -31,7 +31,7 @@ export default class DataTable extends Component {
                   <br></br>
                   Total Death: {info.deaths}
                 </Accordion.Body>
-                <Button onClick={() => this.props.add(info)}> Please work </Button>
+                <Button onClick={() => this.props.add(info)}> Add State/Province </Button>
                 {/* <Button onClick={() => this.props.delete(info._id)}> Delete </Button> */}
                 {/* <Button > Add </Button> */}
               </Accordion.Item>
