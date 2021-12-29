@@ -6,8 +6,6 @@ import axios from 'axios'
 import DataTable from './DataTable'
 import Chart from './Chart'
 import { withAuth0 } from '@auth0/auth0-react';
-import { useAuth0 } from "@auth0/auth0-react";
-import LogoutButton from './LogoutButton'
 import LoginButton from './LoginButton'
 
 
@@ -161,7 +159,7 @@ class ZipForm extends Component {
 }
 
   render() {
-    const {  user, isAuthenticated, isLoading } = this.props.auth0;
+    const {  isAuthenticated } = this.props.auth0;
     return (
       <div>
         
