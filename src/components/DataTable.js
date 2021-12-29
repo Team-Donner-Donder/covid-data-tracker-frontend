@@ -3,7 +3,7 @@ import { Accordion } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {Container} from 'react-bootstrap'
-import { ListGroup,ListGroupItem,CardGroup,Row,Col } from "react-bootstrap";
+import { ListGroup,ListGroupItem,CardGroup } from "react-bootstrap";
 
 
 export default class DataTable extends Component {
@@ -11,20 +11,18 @@ export default class DataTable extends Component {
   render() {
 
     return (
-      <div>
-        <Container fluid>
+      <>
+        <Container>
         
-        <CardGroup>
-        <Row xs={1} md={2} className="g-4">
-  {Array.from({ length: 1 }).map((_, idx) => (
-    <Col> 
+        <>
+          
         <Card
           className='text-center'
           border='primary'
-          style={{ width: "30rem", marginLeft: "38%" }}
+          style={{marginLeft:'22%', color: 'red', backgroundColor:'red'}}
         >
 
-          <Card style={{width: '18rem'}} border="primary">
+          <Card style={{width: '38rem', marginLeft:'22%'}} border="primary">
             {this.props.getCurrentData.data?.map((info, idx) => (
               <Card.Body eventKey='0'>
                 <Card.Header>
@@ -43,8 +41,10 @@ export default class DataTable extends Component {
 
 
           </Card>
-          <Card style={{width: '18rem'}} border="danger">
+          {/* historic cards */}
+          <Card style={{width: '65rem',display: 'flex', flexDirection: 'row'}} border="danger">
             {this.props.mongoData.map((info, idx) => (
+              <Card style={{flex: 1}}>
               <Card.Body >
                 <Card.Header>
                 <ListGroupItem>{info.province} {info.last_update}</ListGroupItem>
@@ -56,18 +56,17 @@ export default class DataTable extends Component {
                 </Card.Body>
                 <Button onClick={() => this.props.delete((info._id))}> Delete </Button>
               </Card.Body>
-            ))}
+              </Card>
+              ))}
           </Card>
 
 
 
 
         </Card>
-        </Col>
-  ))}</Row>
-  </CardGroup>
+        </>
         </Container>
-      </div>
+      </>
     );
     // }
   }

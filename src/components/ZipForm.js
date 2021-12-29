@@ -193,8 +193,6 @@ class ZipForm extends Component {
             <Button variant="primary" type="submit">
               Submit
             </Button>
-            {/* <Button onClick={this.handleAddCityClick}>
-              Add Location</Button> */}
           </Form>}
         </Card>
         {isAuthenticated &&
