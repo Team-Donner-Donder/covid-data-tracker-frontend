@@ -71,22 +71,32 @@ form-content {
 
 #beau {
   background-image: url("./images/beau.png");
+  border-style: solid;
+  border-color: #2B2D42;
 }
 
 #matt {
   background-image: url("./images/matt.png");
+  border-style: solid;
+  border-color: #2B2D42;
 }
 
 #chris {
-  background-image: url("./images/chris.png")
+  background-image: url("./images/chris.png");
+  border-style: solid;
+  border-color: #2B2D42;
 }
 
 #jacob {
-  background-image: url("./images/jacob.png")
+  background-image: url("./images/jacob.png");
+  border-style: solid;
+  border-color: #2B2D42;
 }
 
 #milsap {
-  background-image: url("./images/milsap.png")
+  background-image: url("./images/milsap.png");
+  border-style: solid;
+  border-color: #2B2D42;
 }
 
 .about {

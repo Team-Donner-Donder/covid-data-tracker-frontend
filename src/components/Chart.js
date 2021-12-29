@@ -25,7 +25,7 @@ export default class Chart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray='4 4' />
-        <XAxis label='Dates' stroke='#8884d8' width={100} />
+        <XAxis stroke='#8884d8' width={100} dataKey='date' />
         <YAxis />
         <Tooltip />
         <Legend />
