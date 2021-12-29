@@ -6,6 +6,10 @@ import Footer from './components/Footer.js';
 import About from './components/About.js';
 import React from 'react';
 import Data from './components/Data.js';
+import { BrowserRouter as Routes,
+  Route,} from "react-router-dom";
+
+
 // import Login from './components/Login.js';
 // import NotFound from './components/404.js'
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -52,8 +56,8 @@ class App extends React.Component {
             <Header />
           <Routes>
             <Route exact path="/" element={<Main/>} />
-            <Route exact path="/data" element={<Data/>} />
-            <Route exact path="/about" element={<About/>} />
+            <Route exact path="/Data" element={<Data/>} />
+            <Route exact path="/About" element={<About/>} />
             {/* <Route exact path="/*" component={NotFound} /> */}
             {/* <Route path="/" > 
             <Main />
